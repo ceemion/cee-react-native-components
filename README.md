@@ -4,4 +4,4 @@ A store house of my custom built React Native components
 ## Components
 * React Native
   * Android
-    * CeeToolbarAndroid
+    * [CeeToolbarAndroid](components/react-native/android/CeeToolbarAndroid.js)
