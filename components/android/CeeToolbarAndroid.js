@@ -27,6 +27,24 @@ type DefaultProps = {
   subtitle: boolean
 };
 
+
+/** Usage
+
+As an homepage with menu on the left
+<CeeToolbarAndroid
+  title="Home"
+  onLeftPress={() => console.log('pressed left')} />
+
+As a nested route you can go 'back' from
+<CeeToolbarAndroid
+  title="About Us"
+  left="back"
+  leftReturnId={3}
+  onLeftPress={(id) => console.log('ID is : ', id)}
+  subtitle={true} />
+*/
+
+
 const CeeToolbarAndroid = (props: Props) => {
   const {
     left,
