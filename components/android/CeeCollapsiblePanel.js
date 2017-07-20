@@ -23,7 +23,7 @@ type Props = {
 
 /** Usage
 
-<CeeCollapsiblePanel title="Lorem Ipsum">
+<CeeCollapsiblePanel title="Lorem Ipsum" customPress={() => console.log('run on press, along with toggle')}>
   <View>
     <Text>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
@@ -59,7 +59,7 @@ class CeeCollapsiblePanel extends Component {
 
   render() {
     let { expanded } = this.state,
-        { title } = this.props,
+        { title, customPress } = this.props,
         icon = <FAIcon name="angle-down" size={30} />,
         toggle = expanded => { this.setState({expanded}) };
 
@@ -67,10 +67,18 @@ class CeeCollapsiblePanel extends Component {
       icon = <FAIcon name="angle-up" size={30} />
     }
 
+    let onPress = () => {
+      toggle(!expanded)
+
+      if (customPress) {
+        customPress()
+      }
+    }
+
     return (
       <View style={styles.panelContainer}>
         <TouchableNativeFeedback
-          onPress={() => toggle(!expanded)}
+          onPress={onPress}
           background={TouchableNativeFeedback.Ripple(color.touchableBg)}
           underlayColor={color.touchableBg}>
 
