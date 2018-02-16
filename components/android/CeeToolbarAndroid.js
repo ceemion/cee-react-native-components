@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import {
   Text,
   View,
@@ -6,27 +7,6 @@ import {
   TouchableNativeFeedback,
 } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-
-type Props = {
-  title: string,
-  itemColor: string,
-  background: string,
-  left: string,
-  right: boolean,
-  subtitle: boolean,
-  leftArg: string,
-  onLeftPress: () => void,
-  onRightPress: () => void,
-};
-
-type DefaultProps = {
-  itemColor: string,
-  background: string,
-  left: string,
-  right: boolean,
-  subtitle: boolean
-};
-
 
 /** Usage
 
@@ -45,17 +25,18 @@ As a nested route you can go 'back' from
 */
 
 
-const CeeToolbarAndroid = (props: Props) => {
+const CeeToolbarAndroid = (props) => {
   const {
     left,
     right,
     title,
+    leftArg,
     subtitle,
     itemColor,
+    rightIcon,
     background,
     onLeftPress,
     onRightPress,
-    leftArg
   } = props;
   const leftIcon = left === 'back' ? 'arrow-back' : left;
   const elevation = subtitle ? 0 : 8;
@@ -78,7 +59,7 @@ const CeeToolbarAndroid = (props: Props) => {
         <View style={styles.right}>
           <TouchableNativeFeedback onPress={onRightPress}>
             <View style={styles.rightIcon}>
-              <MaterialIcons name="more-vert" size={24} color={itemColor} />
+              <MaterialIcons name={rightIcon || 'more-vert'} size={24} color={itemColor} />
             </View>
           </TouchableNativeFeedback>
         </View>
@@ -94,19 +75,20 @@ CeeToolbarAndroid.propTypes = {
   itemColor: PropTypes.string,
   left: PropTypes.string,
   right: PropTypes.bool,
+  rightIcon: PropTypes.string,
   subtitle: PropTypes.bool,
   leftArg: PropTypes.string,
   onLeftPress: PropTypes.func,
   onRightPress: PropTypes.func
 };
 
-CeeToolbarAndroid.defaultProps = ({
+CeeToolbarAndroid.defaultProps = {
   background: 'white',
   itemColor: 'black',
   left: 'menu',
   right: false,
   subtitle: false
-}: DefaultProps)
+}
 
 const styles = StyleSheet.create({
   container: {
